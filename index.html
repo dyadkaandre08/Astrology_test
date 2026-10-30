@@ -1,1613 +1,2283 @@
 <!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aura Astrology — Персональная астрономия судьбы</title>
 
-    <!-- Google Fonts: Inter (ближайший аналог Apple SF Pro) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<html class="dark" lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <style>
-      /* ================= APPLE DESIGN SYSTEM VARIABLES ================= */
-      :root {
-        --bg-pure: #000000;
-        --bg-elevated: #111113;
-        --bg-glass: rgba(22, 22, 24, 0.65);
-        --bg-card: linear-gradient(
-          180deg,
-          rgba(28, 28, 31, 0.7) 0%,
-          rgba(17, 17, 19, 0.9) 100%
-        );
-
-        --text-primary: #f5f5f7;
-        --text-secondary: #86868b;
-        --text-tertiary: #515155;
-
-        /* Apple "Desert Titanium" / Starlight Palette */
-        --accent: #e5d1b8;
-        --accent-bright: #fff3e6;
-        --accent-glow: rgba(229, 209, 184, 0.14);
-
-        --border-subtle: rgba(255, 255, 255, 0.08);
-        --border-highlight: rgba(229, 209, 184, 0.3);
-
-        --font-sans:
-          -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
-          sans-serif;
-
-        --radius-lg: 28px;
-        --radius-md: 18px;
-        --radius-pill: 980px;
-
-        --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      /* ================= GLOBAL RESET & BASE ================= */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        background-color: var(--bg-pure);
-        color: var(--text-primary);
-        font-family: var(--font-sans);
-      }
-
-      body {
-        overflow-x: hidden;
-        line-height: 1.5;
-        background-color: var(--bg-pure);
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-        transition:
-          color 0.3s var(--ease-apple),
-          opacity 0.3s var(--ease-apple);
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      .container {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      section {
-        padding: 130px 0;
-        position: relative;
-      }
-
-      /* ================= TYPOGRAPHY (APPLE STYLE) ================= */
-      .eyebrow {
-        font-size: 0.875rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 12px;
-        display: block;
-      }
-
-      .headline-xl {
-        font-size: clamp(2.75rem, 6vw, 4.75rem);
-        font-weight: 600;
-        letter-spacing: -0.035em;
-        line-height: 1.06;
-        background: linear-gradient(
-          180deg,
-          #ffffff 0%,
-          #f5f5f7 45%,
-          #a19688 100%
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .headline-lg {
-        font-size: clamp(2rem, 4.5vw, 3.25rem);
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        color: var(--text-primary);
-      }
-
-      .subheadline {
-        font-size: clamp(1.125rem, 2vw, 1.375rem);
-        font-weight: 400;
-        color: var(--text-secondary);
-        letter-spacing: -0.01em;
-        line-height: 1.5;
-      }
-
-      .section-header {
-        text-align: center;
-        max-width: 680px;
-        margin: 0 auto 72px;
-      }
-
-      /* ================= SCROLL REVEAL ANIMATION ================= */
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 1s var(--ease-apple),
-          transform 1s var(--ease-apple);
-      }
-
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* ================= BUTTONS ================= */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 14px 28px;
-        font-size: 0.9375rem;
-        font-weight: 500;
-        border-radius: var(--radius-pill);
-        cursor: pointer;
-        transition: all 0.3s var(--ease-apple);
-        border: none;
-        font-family: var(--font-sans);
-      }
-
-      .btn-primary {
-        background: var(--text-primary);
-        color: var(--bg-pure);
-      }
-
-      .btn-primary:hover {
-        background: var(--accent-bright);
-        transform: scale(1.02);
-        box-shadow: 0 0 30px rgba(229, 209, 184, 0.25);
-      }
-
-      .btn-secondary {
-        background: rgba(255, 255, 255, 0.08);
-        color: var(--text-primary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-subtle);
-      }
-
-      .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.14);
-      }
-
-      .link-chevron {
-        color: var(--accent);
-        font-size: 1rem;
-        font-weight: 500;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .link-chevron svg {
-        transition: transform 0.25s var(--ease-apple);
-      }
-
-      .link-chevron:hover svg {
-        transform: translateX(4px);
-      }
-
-      /* ================= GLOBAL NAVIGATION (HEADER) ================= */
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 52px;
-        background: rgba(0, 0, 0, 0.72);
-        backdrop-filter: saturate(180%) blur(20px);
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        border-bottom: 1px solid var(--border-subtle);
-        z-index: 1000;
-      }
-
-      .nav-container {
-        max-width: 1080px;
-        height: 100%;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: var(--text-primary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .logo svg {
-        color: var(--accent);
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 32px;
-      }
-
-      .nav-links a {
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        font-weight: 400;
-      }
-
-      .nav-links a:hover {
-        color: var(--text-primary);
-      }
-
-      .nav-cta {
-        padding: 6px 14px;
-        font-size: 0.75rem;
-        background: rgba(255, 255, 255, 0.12);
-        color: var(--text-primary);
-        border-radius: var(--radius-pill);
-        font-weight: 500;
-      }
-
-      .nav-cta:hover {
-        background: var(--text-primary);
-        color: var(--bg-pure);
-      }
-
-      /* ================= HERO SECTION ================= */
-      .hero {
-        min-height: 100vh;
-        padding-top: 140px;
-        padding-bottom: 80px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
-      }
-
-      .hero-copy {
-        max-width: 820px;
-        margin: 0 auto;
-        z-index: 2;
-      }
-
-      .hero-copy .subheadline {
-        max-width: 580px;
-        margin: 24px auto 40px;
-      }
-
-      .hero-actions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
-      }
-
-      /* Apple Watch "Astronomy" Inspired Eclipse Visual */
-      .cosmos-stage {
-        position: relative;
-        width: 480px;
-        height: 480px;
-        margin: 40px auto 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
-      }
-
-      /* Ambient Aura Behind Planet */
-      .cosmos-glow {
-        position: absolute;
-        width: 420px;
-        height: 420px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(229, 209, 184, 0.22) 0%,
-          rgba(120, 110, 140, 0.08) 45%,
-          transparent 70%
-        );
-        filter: blur(30px);
-        animation: breathe 8s ease-in-out infinite;
-      }
-
-      /* The Eclipse Sphere */
-      .eclipse-orb {
-        position: relative;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #1c1c1f 0%, #050507 75%);
-        box-shadow:
-          inset -12px -12px 30px rgba(229, 209, 184, 0.25),
-          inset 4px 4px 15px rgba(255, 255, 255, 0.08),
-          0 0 60px rgba(229, 209, 184, 0.18);
-        z-index: 2;
-      }
-
-      /* Thin Orbital Rings */
-      .orbit-ring {
-        position: absolute;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.07);
-      }
-
-      .orbit-1 {
-        width: 340px;
-        height: 340px;
-        border-color: rgba(229, 209, 184, 0.15);
-        animation: rotateSlow 40s linear infinite;
-      }
-
-      .orbit-1::after {
-        content: "";
-        position: absolute;
-        top: -3px;
-        left: 50%;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent-bright);
-        box-shadow: 0 0 12px var(--accent-bright);
-      }
-
-      .orbit-2 {
-        width: 460px;
-        height: 460px;
-        border-style: dashed;
-        border-color: rgba(255, 255, 255, 0.06);
-        animation: rotateReverse 65s linear infinite;
-      }
-
-      .orbit-2::before {
-        content: "";
-        position: absolute;
-        bottom: 18%;
-        right: 8%;
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: var(--text-secondary);
-      }
-
-      @keyframes rotateSlow {
-        100% {
-          transform: rotate(360deg);
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
         }
       }
-      @keyframes rotateReverse {
-        100% {
-          transform: rotate(-360deg);
-        }
-      }
-      @keyframes breathe {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.85;
-        }
-        50% {
-          transform: scale(1.08);
-          opacity: 1;
-        }
-      }
-
-      /* ================= BENTO GRID (SERVICES) ================= */
-      .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 20px;
-      }
-
-      .bento-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 44px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition:
-          transform 0.5s var(--ease-apple),
-          border-color 0.5s var(--ease-apple);
-      }
-
-      .bento-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(229, 209, 184, 0.25);
-      }
-
-      /* Bento Span Layout */
-      .span-7 {
-        grid-column: span 7;
-      }
-      .span-5 {
-        grid-column: span 5;
-      }
-
-      .bento-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: rgba(229, 209, 184, 0.08);
-        border: 1px solid rgba(229, 209, 184, 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent);
-        margin-bottom: 36px;
-      }
-
-      .bento-card h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        margin-bottom: 12px;
-        color: var(--text-primary);
-      }
-
-      .bento-card p {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-
-      .bento-glow {
-        position: absolute;
-        top: -80px;
-        right: -80px;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(
-          circle,
-          var(--accent-glow) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-
-      /* ================= INTERACTIVE WIDGET (ZODIAC) ================= */
-      .widget-wrapper {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 64px 48px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .zodiac-grid {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 12px;
-        max-width: 780px;
-        margin: 40px auto 0;
-      }
-
-      .zodiac-btn {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        padding: 18px 10px;
-        color: var(--text-secondary);
-        cursor: pointer;
-        transition: all 0.25s var(--ease-apple);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        font-family: var(--font-sans);
-      }
-
-      .zodiac-symbol {
-        font-size: 1.5rem;
-        font-weight: 300;
-        color: var(--text-primary);
-        transition:
-          color 0.25s var(--ease-apple),
-          transform 0.25s var(--ease-apple);
-      }
-
-      .zodiac-name {
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.01em;
-      }
-
-      .zodiac-btn:hover {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 255, 255, 0.16);
-        color: var(--text-primary);
-      }
-
-      .zodiac-btn.active {
-        background: rgba(229, 209, 184, 0.12);
-        border-color: var(--accent);
-        color: var(--text-primary);
-        box-shadow: 0 0 25px rgba(229, 209, 184, 0.1);
-      }
-
-      .zodiac-btn.active .zodiac-symbol {
-        color: var(--accent);
-        transform: scale(1.1);
-      }
-
-      .oracle-output {
-        max-width: 620px;
-        margin: 40px auto 0;
-        padding-top: 32px;
-        border-top: 1px solid var(--border-subtle);
-        min-height: 110px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition:
-          opacity 0.35s var(--ease-apple),
-          transform 0.35s var(--ease-apple);
-      }
-
-      .oracle-output.changing {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      .oracle-sign-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--accent);
-        margin-bottom: 10px;
-        font-weight: 600;
-      }
-
-      .oracle-message {
-        font-size: 1.25rem;
-        font-weight: 400;
-        color: var(--text-primary);
-        letter-spacing: -0.01em;
-        line-height: 1.5;
-      }
-
-      /* ================= ABOUT SECTION ================= */
-      .about-card {
-        background: var(--bg-elevated);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        display: grid;
-        grid-template-columns: 5fr 7fr;
-        align-items: center;
-      }
-
-      .about-visual {
-        height: 100%;
-        min-height: 480px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .about-visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(25%) contrast(1.05);
-        transition: transform 1.2s var(--ease-apple);
-      }
-
-      .about-card:hover .about-visual img {
-        transform: scale(1.03);
-      }
-
-      .about-visual::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          transparent 60%,
-          var(--bg-elevated) 100%
-        );
-      }
-
-      .about-details {
-        padding: 64px;
-      }
-
-      .about-details p {
-        color: var(--text-secondary);
-        font-size: 1.0625rem;
-        margin-top: 20px;
-        line-height: 1.65;
-      }
-
-      .stats-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-        margin-top: 44px;
-        padding-top: 36px;
-        border-top: 1px solid var(--border-subtle);
-      }
-
-      .stat-value {
-        font-size: 2.5rem;
-        font-weight: 600;
-        letter-spacing: -0.04em;
-        background: linear-gradient(180deg, #fff 0%, var(--accent) 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 1.1;
-      }
-
-      .stat-label {
-        font-size: 0.8125rem;
-        color: var(--text-secondary);
-        margin-top: 6px;
-        display: block;
-      }
-
-      /* ================= REVIEWS SECTION ================= */
-      .reviews-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-
-      .review-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 36px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .review-stars {
-        color: var(--accent);
-        font-size: 0.85rem;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-      }
-
-      .review-quote {
-        font-size: 1rem;
-        color: var(--text-primary);
-        line-height: 1.65;
-        margin-bottom: 28px;
-        font-weight: 400;
-      }
-
-      .review-author {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-      }
-
-      /* ================= FAQ SECTION (MINIMAL ACCORDION) ================= */
-      .faq-list {
-        max-width: 760px;
-        margin: 0 auto;
-        border-top: 1px solid var(--border-subtle);
-      }
-
-      .faq-item {
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .faq-trigger {
-        width: 100%;
-        padding: 26px 0;
-        background: none;
-        border: none;
-        color: var(--text-primary);
-        font-family: var(--font-sans);
-        font-size: 1.125rem;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-        text-align: left;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        transition: color 0.2s ease;
-      }
-
-      .faq-trigger:hover {
-        color: var(--accent);
-      }
-
-      .faq-icon {
-        width: 24px;
-        height: 24px;
-        position: relative;
-        transition: transform 0.35s var(--ease-apple);
-        color: var(--text-secondary);
-      }
-
-      .faq-item.active .faq-icon {
-        transform: rotate(45deg);
-        color: var(--accent);
-      }
-
-      .faq-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s var(--ease-apple);
-      }
-
-      .faq-content p {
-        padding-bottom: 26px;
-        color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.65;
-        max-width: 680px;
-      }
-
-      /* ================= FOOTER (APPLE MINIMAL) ================= */
-      footer {
-        background: #050507;
-        border-top: 1px solid var(--border-subtle);
-        padding: 72px 0 40px;
-        font-size: 0.8125rem;
-        color: var(--text-secondary);
-      }
-
-      .footer-top {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1.5fr;
-        gap: 40px;
-        padding-bottom: 56px;
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .footer-brand p {
-        margin-top: 14px;
-        max-width: 260px;
-        line-height: 1.6;
-      }
-
-      .footer-col h4 {
-        color: var(--text-primary);
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 16px;
-      }
-
-      .footer-col a,
-      .footer-col p {
-        display: block;
-        margin-bottom: 10px;
-        color: var(--text-secondary);
-      }
-
-      .footer-col a:hover {
-        color: var(--text-primary);
-      }
-
-      .apple-input-group {
-        display: flex;
-        margin-top: 14px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-pill);
-        padding: 4px;
-        transition: border-color 0.3s ease;
-      }
-
-      .apple-input-group:focus-within {
-        border-color: var(--accent);
-      }
-
-      .apple-input-group input {
-        background: transparent;
-        border: none;
-        color: var(--text-primary);
-        padding: 8px 14px;
-        font-size: 0.8125rem;
-        width: 100%;
-        outline: none;
-        font-family: var(--font-sans);
-      }
-
-      .apple-input-group button {
-        background: var(--text-primary);
-        color: var(--bg-pure);
-        border: none;
-        border-radius: var(--radius-pill);
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        flex-shrink: 0;
-        transition: background 0.2s ease;
-      }
-
-      .apple-input-group button:hover {
-        background: var(--accent);
-      }
-
-      .footer-bottom {
-        padding-top: 28px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--text-tertiary);
-        font-size: 0.75rem;
-      }
-
-      /* ================= RESPONSIVE ================= */
-      @media (max-width: 960px) {
-        .span-7,
-        .span-5 {
-          grid-column: span 12;
-        }
-        .zodiac-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-        .about-card {
-          grid-template-columns: 1fr;
-        }
-        .about-visual {
-          min-height: 320px;
-        }
-        .about-visual::after {
-          background: linear-gradient(
-            180deg,
-            transparent 50%,
-            var(--bg-elevated) 100%
-          );
-        }
-        .about-details {
-          padding: 40px 32px;
-        }
-        .reviews-grid {
-          grid-template-columns: 1fr;
-        }
-        .footer-top {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-
-      @media (max-width: 640px) {
-        section {
-          padding: 90px 0;
-        }
-        .nav-links {
-          display: none;
-        }
-        .hero-actions {
-          flex-direction: column;
-          gap: 16px;
-        }
-        .cosmos-stage {
-          width: 320px;
-          height: 320px;
-        }
-        .eclipse-orb {
-          width: 160px;
-          height: 160px;
-        }
-        .orbit-1 {
-          width: 240px;
-          height: 240px;
-        }
-        .orbit-2 {
-          width: 310px;
-          height: 310px;
-        }
-        .zodiac-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        .widget-wrapper {
-          padding: 40px 20px;
-        }
-        .stats-row {
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-        .footer-top {
-          grid-template-columns: 1fr;
-        }
-        .footer-bottom {
-          flex-direction: column;
-          gap: 12px;
-          text-align: center;
-        }
+      ::-webkit-scrollbar {
+        display: none;
       }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#f0e0c8",
+              "on-primary-container": "#675945",
+              "tertiary-fixed-dim": "#cdc5bc",
+              "on-error": "#690005",
+              "on-tertiary": "#34302a",
+              error: "#ffb4ab",
+              "outline-variant": "#4c463d",
+              "on-primary": "#3a2e1d",
+              "on-secondary-fixed-variant": "#4f4533",
+              "on-primary-fixed-variant": "#524532",
+              outline: "#988f85",
+              "primary-fixed-dim": "#d7c4ab",
+              "inverse-on-surface": "#313032",
+              "surface-dim": "#131315",
+              "on-surface-variant": "#cfc5ba",
+              "on-background": "#e5e1e4",
+              "on-error-container": "#ffdad6",
+              tertiary: "#f7efe6",
+              "surface-container": "#201f22",
+              "on-tertiary-fixed": "#1e1b16",
+              "surface-container-highest": "#353437",
+              "secondary-fixed-dim": "#d3c5ad",
+              "inverse-surface": "#e5e1e4",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#e9e1d8",
+              "tertiary-container": "#dbd3ca",
+              "on-secondary-fixed": "#221b0b",
+              "on-secondary": "#382f1e",
+              "surface-container-lowest": "#0e0e10",
+              "surface-tint": "#d7c4ab",
+              "surface-container-high": "#2a2a2c",
+              background: "#131315",
+              "surface-bright": "#39393b",
+              "on-surface": "#e5e1e4",
+              "on-secondary-container": "#c5b79f",
+              primary: "#ffeeda",
+              "primary-fixed": "#f4dfc6",
+              "on-primary-fixed": "#241a0a",
+              "on-tertiary-container": "#5f5b53",
+              surface: "#131315",
+              "surface-variant": "#353437",
+              "on-tertiary-fixed-variant": "#4b463f",
+              "primary-container": "#e5d1b8",
+              "surface-container-low": "#1c1b1e",
+              "inverse-primary": "#6b5c48",
+              secondary: "#d3c5ad",
+              "secondary-container": "#524835",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "margin-mobile": "1.25rem",
+              "space-lg": "1.5rem",
+              "space-sm": "0.5rem",
+              gutter: "1.5rem",
+              "space-xl": "2.5rem",
+              "space-md": "1rem",
+              margin: "3rem",
+              "gutter-mobile": "1rem",
+              "space-xs": "0.25rem",
+            },
+            fontFamily: {
+              "label-md": ["Inter"],
+              "headline-lg-mobile": ["Bodoni Moda"],
+              "display-lg": ["Bodoni Moda"],
+              "display-lg-mobile": ["Bodoni Moda"],
+              "body-sm": ["Inter"],
+              "headline-sm": ["Inter"],
+              "headline-md": ["Bodoni Moda"],
+              "body-lg": ["Inter"],
+              "label-lg": ["Inter"],
+              "label-sm": ["Inter"],
+              "headline-lg": ["Bodoni Moda"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "label-md": [
+                "11px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.08em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                {
+                  lineHeight: "36px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg": [
+                "56px",
+                {
+                  lineHeight: "64px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg-mobile": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "body-sm": [
+                "12px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "headline-sm": [
+                "18px",
+                {
+                  lineHeight: "26px",
+                  letterSpacing: "-0.005em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": [
+                "16px",
+                { lineHeight: "26px", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "label-lg": [
+                "13px",
+                {
+                  lineHeight: "18px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "500",
+                },
+              ],
+              "label-sm": [
+                "9px",
+                {
+                  lineHeight: "12px",
+                  letterSpacing: "0.12em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "36px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.015em",
+                  fontWeight: "400",
+                },
+              ],
+              "body-md": [
+                "14px",
+                {
+                  lineHeight: "22px",
+                  letterSpacing: "0.005em",
+                  fontWeight: "400",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body>
-    <!-- GLOBAL NAV -->
-    <header>
-      <div class="nav-container">
-        <a href="#home" class="logo">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
+  <body
+    class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-surface/75 backdrop-blur-2xl shadow-[0_1px_16px_rgba(0,0,0,0.4)]"
+    >
+      <div
+        class="h-20 max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-md">
+          <a
+            class="flex items-center gap-space-sm group"
+            data-path="glavnaya"
+            href="#"
+            ><div
+              class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shadow-[0_0_16px_2px_rgba(247,231,206,0.25)] transition-transform duration-300 group-hover:scale-105"
+            >
+              <span class="material-symbols-outlined text-primary text-[20px]"
+                >auto_awesome</span
+              >
+            </div>
+            <span
+              class="font-headline-md text-headline-md tracking-tight text-primary"
+              >AURA</span
+            ></a
           >
-            <circle cx="12" cy="12" r="9"></circle>
-            <path
-              d="M12 3a9 9 0 0 0 0 18 7 7 0 0 1 0-18Z"
-              fill="currentColor"
-              fill-opacity="0.2"
-            ></path>
-          </svg>
-          Aura Astrology
-        </a>
-        <nav class="nav-links">
-          <a href="#services">Разборы</a>
-          <a href="#interactive">Инсайт дня</a>
-          <a href="#about">Об эксперте</a>
-          <a href="#reviews">Опыт</a>
-          <a href="#faq">Вопросы</a>
+        </div>
+        <nav
+          class="hidden xl:flex items-center gap-space-lg"
+          data-active-classes="bg-primary-container text-on-primary-container font-label-md text-label-md px-space-md py-space-xs rounded-full shadow-[0_0_12px_rgba(229,209,184,0.2)]"
+        >
+          <a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="razbory"
+            href="#"
+            >Разборы</a
+          ><a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="insayt-dnya"
+            href="#"
+            >Инсайт дня</a
+          ><a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="ob-eksperte"
+            href="#"
+            >Об эксперте</a
+          ><a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="otzyvy"
+            href="#"
+            >Отзывы</a
+          ><a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="tarify"
+            href="#"
+            >Тарифы</a
+          ><a
+            class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors py-space-xs"
+            data-path="faq"
+            href="#"
+            >FAQ</a
+          >
         </nav>
-        <a href="#interactive" class="nav-cta">Рассчитать</a>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-sm rounded-full bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-[0_0_20px_rgba(229,209,184,0.25)] hover:shadow-[0_0_24px_rgba(229,209,184,0.4)] transition-all hover:scale-[1.015]"
+            data-path="raschet-karty"
+            href="#"
+            >Рассчитать карту</a
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-on-primary text-[18px]"
+              >person</span
+            >
+          </div>
+        </div>
       </div>
     </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-copy reveal">
-          <span class="eyebrow">Персональная астрономия судьбы</span>
-          <h1 class="headline-xl">
-            Ваша вселенная.<br />В мельчайших деталях.
-          </h1>
-          <p class="subheadline">
-            Глубокий аналитический разбор натальной карты, транзитов и
-            синастрии. Точность звездной механики, переведенная на язык вашей
-            жизни.
-          </p>
-          <div class="hero-actions">
-            <a href="#interactive" class="btn btn-primary">Получить разбор</a>
-            <a href="#services" class="link-chevron">
-              Изучить направления
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="cosmos-stage reveal">
-          <div class="cosmos-glow"></div>
-          <div class="orbit-ring orbit-1"></div>
-          <div class="orbit-ring orbit-2"></div>
-          <div class="eclipse-orb"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES (BENTO GRID) -->
-    <section id="services">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="eyebrow">Направления</span>
-          <h2 class="headline-lg">Фундаментальный взгляд на ваш потенциал.</h2>
-        </div>
-
-        <div class="bento-grid">
-          <!-- Card 1 -->
-          <div class="bento-card span-7 reveal">
-            <div class="bento-glow"></div>
-            <div class="bento-icon">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="3" />
-                <line x1="12" y1="2" x2="12" y2="5" />
-                <line x1="12" y1="19" x2="12" y2="22" />
-              </svg>
-            </div>
-            <div>
-              <h3>Натальная карта</h3>
-              <p>
-                Архитектура вашей личности. Глубокий анализ врожденных талантов,
-                скрытых ресурсов, кармических векторов и предназначения на
-                основе точного положения планет в минуту рождения.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="bento-card span-5 reveal">
-            <div class="bento-icon">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
-                <circle cx="9" cy="12" r="6" />
-                <circle cx="15" cy="12" r="6" />
-              </svg>
-            </div>
-            <div>
-              <h3>Синастрия</h3>
-              <p>
-                Геометрия отношений. Точки притяжения, зоны роста и долгосрочная
-                совместимость с партнером.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="bento-card span-5 reveal">
-            <div class="bento-icon">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
-                <circle cx="12" cy="12" r="5" />
-                <path
-                  d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3>Соляр на год</h3>
-              <p>
-                Персональная навигация от вашего дня рождения. Ключевые тренды,
-                окна возможностей и периоды осторожности.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="bento-card span-7 reveal">
-            <div class="bento-glow"></div>
-            <div class="bento-icon">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
-                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
-                <line x1="12" y1="22" x2="12" y2="15.5" />
-                <polyline points="22 8.5 12 15.5 2 8.5" />
-              </svg>
-            </div>
-            <div>
-              <h3>Финансовый вектор</h3>
-              <p>
-                Определение ваших персональных денежных ниш. Стратегии
-                масштабирования дохода, устранение внутренних финансовых блоков
-                и выбор оптимальных сфер для инвестиций и карьеры.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE ZODIAC WIDGET -->
-    <section id="interactive">
-      <div class="container">
-        <div class="widget-wrapper reveal">
-          <span class="eyebrow">Ежедневная синхронизация</span>
-          <h2 class="headline-lg">Импульс сегодняшнего дня</h2>
-          <p class="subheadline" style="margin-top: 12px">
-            Выберите своё созвездие для получения персонального фокуса внимания.
-          </p>
-
-          <!-- iOS-style Tactile Grid -->
-          <div class="zodiac-grid" id="zodiac-grid">
-            <button
-              class="zodiac-btn active"
-              data-sign="aries"
-              data-title="Овен"
+    <main class="w-full pt-20 bg-surface min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- HERO SECTION -->
+        <section
+          class="relative w-full overflow-hidden bg-surface-container-lowest -mt-20 pt-28 pb-space-xl"
+        >
+          <!-- Ambient Starlight Glow Backgrounds -->
+          <div
+            class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] rounded-full bg-primary-container/10 blur-[130px] pointer-events-none"
+          ></div>
+          <div
+            class="absolute -top-32 right-10 w-[420px] h-[420px] rounded-full bg-secondary-fixed/5 blur-[100px] pointer-events-none"
+          ></div>
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center pt-space-lg"
             >
-              <span class="zodiac-symbol">&#9800;&#xFE0E;</span>
-              <span class="zodiac-name">Овен</span>
-            </button>
-            <button class="zodiac-btn" data-sign="taurus" data-title="Телец">
-              <span class="zodiac-symbol">&#9801;&#xFE0E;</span>
-              <span class="zodiac-name">Телец</span>
-            </button>
-            <button class="zodiac-btn" data-sign="gemini" data-title="Близнецы">
-              <span class="zodiac-symbol">&#9802;&#xFE0E;</span>
-              <span class="zodiac-name">Близнецы</span>
-            </button>
-            <button class="zodiac-btn" data-sign="cancer" data-title="Рак">
-              <span class="zodiac-symbol">&#9803;&#xFE0E;</span>
-              <span class="zodiac-name">Рак</span>
-            </button>
-            <button class="zodiac-btn" data-sign="leo" data-title="Лев">
-              <span class="zodiac-symbol">&#9804;&#xFE0E;</span>
-              <span class="zodiac-name">Лев</span>
-            </button>
-            <button class="zodiac-btn" data-sign="virgo" data-title="Дева">
-              <span class="zodiac-symbol">&#9805;&#xFE0E;</span>
-              <span class="zodiac-name">Дева</span>
-            </button>
-            <button class="zodiac-btn" data-sign="libra" data-title="Весы">
-              <span class="zodiac-symbol">&#9806;&#xFE0E;</span>
-              <span class="zodiac-name">Весы</span>
-            </button>
-            <button
-              class="zodiac-btn"
-              data-sign="scorpio"
-              data-title="Скорпион"
-            >
-              <span class="zodiac-symbol">&#9807;&#xFE0E;</span>
-              <span class="zodiac-name">Скорпион</span>
-            </button>
-            <button
-              class="zodiac-btn"
-              data-sign="sagittarius"
-              data-title="Стрелец"
-            >
-              <span class="zodiac-symbol">&#9808;&#xFE0E;</span>
-              <span class="zodiac-name">Стрелец</span>
-            </button>
-            <button
-              class="zodiac-btn"
-              data-sign="capricorn"
-              data-title="Козерог"
-            >
-              <span class="zodiac-symbol">&#9809;&#xFE0E;</span>
-              <span class="zodiac-name">Козерог</span>
-            </button>
-            <button
-              class="zodiac-btn"
-              data-sign="aquarius"
-              data-title="Водолей"
-            >
-              <span class="zodiac-symbol">&#9810;&#xFE0E;</span>
-              <span class="zodiac-name">Водолей</span>
-            </button>
-            <button class="zodiac-btn" data-sign="pisces" data-title="Рыбы">
-              <span class="zodiac-symbol">&#9811;&#xFE0E;</span>
-              <span class="zodiac-name">Рыбы</span>
-            </button>
-          </div>
-
-          <div class="oracle-output" id="oracle-output">
-            <div class="oracle-sign-label" id="oracle-label">
-              Овен · Фокус дня
-            </div>
-            <p class="oracle-message" id="oracle-text">
-              Сегодня ваша энергия бьет ключом. Направьте её на завершение
-              приоритетных задач и смелые начинания.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT SECTION -->
-    <section id="about">
-      <div class="container">
-        <div class="about-card reveal">
-          <div class="about-visual">
-            <img
-              src="https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=85"
-              alt="Астрономия и космос"
-            />
-          </div>
-          <div class="about-details">
-            <span class="eyebrow">Экспертиза</span>
-            <h2 class="headline-lg">
-              Астрая. Проводник в мир классической астрологии.
-            </h2>
-            <p>
-              Я специализируюсь на западной классической традиции и кармическом
-              анализе. Без мистификации и общих фраз — только точная аналитика
-              вашей карты рождения.
-            </p>
-            <p>
-              Моя задача — перевести сложную геометрию небесных тел на ясный,
-              прикладной язык, который поможет вам принимать верные решения в
-              карьере, финансах и отношениях.
-            </p>
-
-            <div class="stats-row">
-              <div>
-                <div class="stat-value">10+</div>
-                <span class="stat-label">Лет практики</span>
-              </div>
-              <div>
-                <div class="stat-value">5000+</div>
-                <span class="stat-label">Личных разборов</span>
-              </div>
-              <div>
-                <div class="stat-value">98%</div>
-                <span class="stat-label">Точность прогнозов</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- REVIEWS SECTION -->
-    <section id="reviews">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="eyebrow">Отзывы</span>
-          <h2 class="headline-lg">Истории ясности и трансформации.</h2>
-        </div>
-
-        <div class="reviews-grid">
-          <div class="review-card reveal">
-            <div>
-              <div class="review-stars">★★★★★</div>
-              <p class="review-quote">
-                «Консультация превзошла все ожидания. Я наконец-то поняла
-                природу своих карьерных ограничений. После разбора натальной
-                карты сменила вектор, и за полгода мой доход вырос вдвое.»
-              </p>
-            </div>
-            <div class="review-author">Елена М. — Предприниматель</div>
-          </div>
-
-          <div class="review-card reveal">
-            <div>
-              <div class="review-stars">★★★★★</div>
-              <p class="review-quote">
-                «Разбор синастрии буквально сохранил наш союз. Мы увидели свои
-                кармические задачи и перестали требовать друг от друга
-                невозможного. Невероятно глубокий и деликатный подход.»
-              </p>
-            </div>
-            <div class="review-author">Михаил и Анна — Семейная пара</div>
-          </div>
-
-          <div class="review-card reveal">
-            <div>
-              <div class="review-stars">★★★★★</div>
-              <p class="review-quote">
-                «Соляр на год сработал с поразительной точностью. Я была заранее
-                предупреждена о рисках в бизнесе осенью и смогла вовремя
-                реструктурировать активы без потерь.»
-              </p>
-            </div>
-            <div class="review-author">Виктория С. — Инвестор</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section id="faq">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="eyebrow">Детали</span>
-          <h2 class="headline-lg">Частые вопросы</h2>
-        </div>
-
-        <div class="faq-list reveal">
-          <div class="faq-item">
-            <button class="faq-trigger">
-              <span>Нужно ли знать точное время рождения?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-            <div class="faq-content">
-              <p>
-                Да, для построения точной сетки домов необходимо время рождения
-                с точностью до минут. Если время неизвестно, перед консультацией
-                мы проводим процедуру ректификации — математическое
-                восстановление времени по ключевым событиям вашего прошлого.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-trigger">
-              <span>В каком формате проходит консультация?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-            <div class="faq-content">
-              <p>
-                Встреча проходит онлайн по видеосвязи (Zoom или FaceTime) и
-                длится 1,5–2 часа. По итогам у вас навсегда остается видеозапись
-                разговора и структурированный PDF-документ с главными тезисами и
-                рекомендациями.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-trigger">
-              <span>Это гадание? Вы предсказываете фатальное будущее?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-            <div class="faq-content">
-              <p>
-                Профессиональная астрология не имеет отношения к эзотерическим
-                гаданиям. Мы анализируем астрономические циклы, врожденный
-                потенциал и вероятности. Будущее всегда вариативно, а карта дает
-                вам точную систему навигации для выбора лучшего сценария.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-trigger">
-              <span>За сколько дней необходимо бронировать дату?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
-            <div class="faq-content">
-              <p>
-                Запись ведется за 1–2 недели. Каждая карта разбирается вручную
-                без использования шаблонных компьютерных трактовок, поэтому мне
-                требуется время на глубокую предварительную подготовку до нашей
-                встречи.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <a href="#home" class="logo">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              >
-                <circle cx="12" cy="12" r="9"></circle>
-                <path
-                  d="M12 3a9 9 0 0 0 0 18 7 7 0 0 1 0-18Z"
-                  fill="currentColor"
-                  fill-opacity="0.2"
-                ></path>
-              </svg>
-              Aura Astrology
-            </a>
-            <p>
-              Персональная астрологическая аналитика. Познайте архитектуру своей
-              судьбы.
-            </p>
-          </div>
-
-          <div class="footer-col">
-            <h4>Навигация</h4>
-            <a href="#services">Разборы</a>
-            <a href="#interactive">Инсайт дня</a>
-            <a href="#about">Об эксперте</a>
-            <a href="#reviews">Отзывы</a>
-            <a href="#faq">Вопросы</a>
-          </div>
-
-          <div class="footer-col">
-            <h4>Связь</h4>
-            <a href="mailto:astro@aura-astrology.com"
-              >astro@aura-astrology.com</a
-            >
-            <a href="#">Telegram: @aura_astro</a>
-            <a href="tel:+79990000000">+7 (999) 000-00-00</a>
-          </div>
-
-          <div class="footer-col">
-            <h4>Астрономический дайджест</h4>
-            <p>Лунный календарь и ключевые транзиты месяца без спама.</p>
-            <form
-              class="apple-input-group"
-              onsubmit="
-                event.preventDefault();
-                this.reset();
-                alert('Вы успешно подписаны на дайджест Aura.');
-              "
-            >
-              <input type="email" placeholder="Ваш Email" required />
-              <button type="submit" aria-label="Подписаться">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
+              <!-- Left: Editorial Headline & Actions -->
+              <div class="lg:col-span-7 flex flex-col gap-space-lg z-10">
+                <div
+                  class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-high w-fit shadow-sm"
                 >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                  <span
+                    class="w-2 h-2 rounded-full bg-primary-fixed shadow-[0_0_8px_rgba(244,223,198,0.8)] animate-pulse"
+                  ></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                    >Aura Precision Observatory • JPL Ephemeris 2025</span
+                  >
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                  <h1
+                    class="font-display-lg text-display-lg text-primary tracking-tight font-normal leading-none"
+                  >
+                    Ваша вселенная.<br />
+                    <span
+                      class="italic font-display-lg text-secondary-fixed-dim"
+                      >В мельчайших деталях.</span
+                    >
+                  </h1>
+                  <p
+                    class="font-body-lg text-body-lg text-on-surface-variant max-w-xl"
+                  >
+                    Точная математика натальной механики, свободная от
+                    эзотерического фатализма. Мы дешифруем координаты неба в
+                    практические точки силы для лидерства, отношений и капитала.
+                  </p>
+                </div>
+                <div
+                  class="flex flex-wrap items-center gap-space-md pt-space-xs"
+                >
+                  <a
+                    class="inline-flex items-center justify-center px-space-xl py-space-md rounded-full bg-primary-container text-on-primary font-headline-sm text-headline-sm shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-primary-fixed"
+                    href="#calculator"
+                  >
+                    Рассчитать натальную карту
+                    <span
+                      class="material-symbols-outlined ml-space-xs text-[20px]"
+                      >north_east</span
+                    >
+                  </a>
+                  <a
+                    class="inline-flex items-center justify-center px-space-xl py-space-md rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm transition-all duration-200 hover:bg-surface-container-highest"
+                    href="#services"
+                  >
+                    Смотреть разборы
+                  </a>
+                </div>
+                <!-- Trust Badges -->
+                <div class="grid grid-cols-3 gap-space-md pt-space-md">
+                  <div class="flex flex-col">
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >4.98 ★</span
+                    >
+                    <span class="font-label-md text-label-md text-outline"
+                      >Рейтинг 1 200+ отзывов</span
+                    >
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >5 000+</span
+                    >
+                    <span class="font-label-md text-label-md text-outline"
+                      >Атласов составлено</span
+                    >
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >NASA JPL</span
+                    >
+                    <span class="font-label-md text-label-md text-outline"
+                      >Швейцарская точность</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Right: Astronomical Celestial Instrument Wheel -->
+              <div
+                class="lg:col-span-5 relative flex items-center justify-center"
+              >
+                <div
+                  class="relative w-[340px] sm:w-[420px] aspect-square rounded-full bg-surface-container-low shadow-2xl flex items-center justify-center p-space-md"
+                >
+                  <!-- Dial Rings SVG -->
+                  <svg
+                    class="absolute inset-0 w-full h-full text-secondary/30 animate-[spin_120s_linear_infinite]"
+                    fill="none"
+                    viewbox="0 0 400 400"
+                  >
+                    <!-- Outer tick track -->
+                    <circle
+                      cx="200"
+                      cy="200"
+                      opacity="0.4"
+                      r="190"
+                      stroke="currentColor"
+                      stroke-dasharray="2 6"
+                      stroke-width="1"
+                    ></circle>
+                    <circle
+                      cx="200"
+                      cy="200"
+                      opacity="0.6"
+                      r="165"
+                      stroke="currentColor"
+                      stroke-width="0.75"
+                    ></circle>
+                    <circle
+                      cx="200"
+                      cy="200"
+                      opacity="0.5"
+                      r="130"
+                      stroke="currentColor"
+                      stroke-dasharray="8 4"
+                      stroke-width="1"
+                    ></circle>
+                    <circle
+                      cx="200"
+                      cy="200"
+                      opacity="0.3"
+                      r="95"
+                      stroke="currentColor"
+                      stroke-width="0.5"
+                    ></circle>
+                    <!-- House Axis Lines -->
+                    <line
+                      opacity="0.35"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      x1="200"
+                      x2="200"
+                      y1="10"
+                      y2="390"
+                    ></line>
+                    <line
+                      opacity="0.35"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      x1="10"
+                      x2="390"
+                      y1="200"
+                      y2="200"
+                    ></line>
+                    <line
+                      opacity="0.2"
+                      stroke="currentColor"
+                      stroke-width="0.5"
+                      x1="65"
+                      x2="335"
+                      y1="65"
+                      y2="335"
+                    ></line>
+                    <line
+                      opacity="0.2"
+                      stroke="currentColor"
+                      stroke-width="0.5"
+                      x1="65"
+                      x2="335"
+                      y1="335"
+                      y2="65"
+                    ></line>
+                    <!-- Aspect Polygon -->
+                    <polygon
+                      fill="none"
+                      opacity="0.5"
+                      points="200,35 345,155 310,315 90,315 55,155"
+                      stroke="currentColor"
+                      stroke-width="1"
+                    ></polygon>
+                  </svg>
+                  <!-- Celestial Orbit Center Orb -->
+                  <div
+                    class="relative z-10 w-44 h-44 rounded-full bg-surface-container flex flex-col items-center justify-center text-center p-space-md shadow-[0_0_40px_rgba(229,209,184,0.18)]"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-[32px] mb-1"
+                      >all_inclusive</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-primary tracking-wide"
+                      >RA 14h 29m</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant font-mono"
+                      >Dec +60° 11' 09"</span
+                    >
+                    <div
+                      class="mt-2 px-space-xs py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-wider"
+                    >
+                      MC в Тельце 14°
+                    </div>
+                  </div>
+                  <!-- Orbiting Planetary Nodes -->
+                  <div
+                    class="absolute top-6 left-1/3 flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high/90 shadow-md"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary-fixed"
+                    ></span>
+                    <span
+                      class="font-label-md text-label-md text-primary font-mono"
+                      >☉ 28° Скорпион</span
+                    >
+                  </div>
+                  <div
+                    class="absolute bottom-8 right-6 flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high/90 shadow-md"
+                  >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"
+                    ></span>
+                    <span
+                      class="font-label-md text-label-md text-secondary-fixed font-mono"
+                      >☽ 04° Рыбы</span
+                    >
+                  </div>
+                  <div
+                    class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high/90 shadow-md"
+                  >
+                    <span
+                      class="font-label-md text-label-md text-on-surface font-mono"
+                      >Asc 19° Весы</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- INTERACTIVE LIVE BIRTH CHART CALCULATOR -->
+        <section
+          class="w-full bg-surface-container-low py-space-xl"
+          id="calculator"
+        >
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg"
+            >
+              <div>
+                <span
+                  class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                  >Экспресс-дешифратор</span
+                >
+                <h2 class="font-headline-lg text-headline-lg text-primary mt-1">
+                  Рассчитайте ядро вашей космограммы
+                </h2>
+              </div>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant max-w-md"
+              >
+                Мгновенный расчет знака Солнца, Асцендента и лунной
+                психоэмоциональной опоры на алгоритмах Ephemeris NASA.
+              </p>
+            </div>
+            <!-- Calculator Input Console -->
+            <div
+              class="bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col gap-space-lg"
+            >
+              <form
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md"
+                id="astrology-calc-form"
+                onsubmit="return false;"
+              >
+                <!-- Date -->
+                <div class="flex flex-col gap-space-xs">
+                  <label
+                    class="font-label-md text-label-md text-secondary uppercase tracking-wider"
+                    >Дата рождения</label
+                  >
+                  <input
+                    class="w-full bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface-container-highest transition-colors"
+                    id="calc-dob"
+                    type="date"
+                    value="1995-10-24"
+                  />
+                </div>
+                <!-- Time -->
+                <div class="flex flex-col gap-space-xs">
+                  <div class="flex items-center justify-between">
+                    <label
+                      class="font-label-md text-label-md text-secondary uppercase tracking-wider"
+                      >Время рождения</label
+                    >
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input
+                        class="rounded bg-surface-container-highest text-primary-container focus:ring-0"
+                        id="calc-unknown-time"
+                        type="checkbox"
+                      />
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Не знаю время</span
+                      >
+                    </label>
+                  </div>
+                  <input
+                    class="w-full bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface-container-highest transition-colors"
+                    id="calc-tob"
+                    type="time"
+                    value="14:35"
+                  />
+                </div>
+                <!-- City -->
+                <div class="flex flex-col gap-space-xs">
+                  <label
+                    class="font-label-md text-label-md text-secondary uppercase tracking-wider"
+                    >Город рождения</label
+                  >
+                  <input
+                    class="w-full bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface-container-highest transition-colors"
+                    id="calc-city"
+                    placeholder="Город или координаты"
+                    type="text"
+                    value="Москва, Россия"
+                  />
+                </div>
+                <!-- Action Button -->
+                <div class="flex flex-col justify-end">
+                  <button
+                    class="w-full py-space-sm px-space-md bg-primary-container text-on-primary rounded-lg font-headline-sm text-headline-sm transition-all duration-200 hover:scale-[1.01] hover:bg-primary-fixed shadow-md flex items-center justify-center gap-space-xs"
+                    id="calc-btn"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[20px]"
+                      >explore</span
+                    >
+                    Сформировать отчет
+                  </button>
+                </div>
+              </form>
+              <!-- Dynamic Results Deck -->
+              <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-md"
+                id="calc-results"
+              >
+                <!-- Sun Tile -->
+                <div
+                  class="bg-surface-container-high p-space-md rounded-xl flex flex-col gap-space-xs shadow-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Солнечное Эго</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-primary text-[20px]"
+                      >wb_sunny</span
+                    >
+                  </div>
+                  <div
+                    class="font-headline-md text-headline-md text-primary"
+                    id="res-sun"
+                  >
+                    Скорпион • 01°
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Глубинный стратегический фокус, регенерация ресурсов,
+                    интуитивный аудит среды.
+                  </p>
+                </div>
+                <!-- Moon Tile -->
+                <div
+                  class="bg-surface-container-high p-space-md rounded-xl flex flex-col gap-space-xs shadow-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Лунная Безопасность</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-primary text-[20px]"
+                      >bedtime</span
+                    >
+                  </div>
+                  <div
+                    class="font-headline-md text-headline-md text-primary"
+                    id="res-moon"
+                  >
+                    Скорпион • 26°
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Потребность в предельной честности, тонкое сканирование
+                    скрытых рисков и смыслов.
+                  </p>
+                </div>
+                <!-- Ascendant Tile -->
+                <div
+                  class="bg-surface-container-high p-space-md rounded-xl flex flex-col gap-space-xs shadow-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Асцендент (Оптика мира)</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-primary text-[20px]"
+                      >compass_calibration</span
+                    >
+                  </div>
+                  <div
+                    class="font-headline-md text-headline-md text-primary"
+                    id="res-asc"
+                  >
+                    Водолей • 12°
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Оригинальное мышление, концептуальное визионерство, аура
+                    независимости.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- BENTO GRID OF CORE SERVICES -->
+        <section class="w-full bg-surface py-space-xl" id="services">
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div
+              class="flex flex-col gap-space-xs mb-space-xl text-center md:text-left"
+            >
+              <span
+                class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                >Архитектура жизни</span
+              >
+              <h2
+                class="font-display-lg text-display-lg text-primary font-normal"
+              >
+                Специализированные разборы
+              </h2>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl"
+              >
+                Каждое исследование — фундаментальный фолиант вашей траектории с
+                пошаговыми таймлайнами, точными компенсаторными стратегиями и
+                рекомендациями без мистики.
+              </p>
+            </div>
+            <!-- Bento Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+              <!-- Bento 1: Natal Card (Col Span 7) -->
+              <div
+                class="lg:col-span-7 bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-space-sm py-1 rounded-full bg-surface-container-highest text-secondary font-label-md text-label-md uppercase"
+                      >Флагманский атлас</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm font-mono text-outline"
+                      >CODE: NAT-01</span
+                    >
+                  </div>
+                  <h3 class="font-headline-lg text-headline-lg text-primary">
+                    Натальная карта &amp; Архитектура судьбы
+                  </h3>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant max-w-lg"
+                  >
+                    Комплексный рентген личности: истинные таланты, скрытые
+                    блоки подсознания, кармическая ось Раху-Кету и персональные
+                    ключи к выходу из повторяющихся сценариев.
+                  </p>
+                </div>
+                <!-- Mini House Diagram Visual -->
+                <div
+                  class="my-space-lg p-space-md bg-surface-container-low rounded-lg flex items-center justify-between overflow-x-auto gap-space-md"
+                >
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Дом I</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Я • Персона</span
+                    >
+                  </div>
+                  <span class="material-symbols-outlined text-outline"
+                    >arrow_forward</span
+                  >
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Дом IV</span
+                    >
+                    <span class="font-headline-sm text-headline-sm text-primary"
+                      >Опора • Род</span
+                    >
+                  </div>
+                  <span class="material-symbols-outlined text-outline"
+                    >arrow_forward</span
+                  >
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Дом X</span
+                    >
+                    <span class="font-headline-sm text-headline-sm text-primary"
+                      >Вершина • MC</span
+                    >
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm">
+                  <span class="font-headline-md text-headline-md text-primary"
+                    >от 320 €</span
+                  >
+                  <a
+                    class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-secondary uppercase hover:text-primary transition-colors"
+                    href="#pricing"
+                  >
+                    Подробнее о формате
+                    <span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Bento 2: Synastry (Col Span 5) -->
+              <div
+                class="lg:col-span-5 bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-space-sm py-1 rounded-full bg-surface-container-highest text-secondary font-label-md text-label-md uppercase"
+                      >Союз двух орбит</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm font-mono text-outline"
+                      >CODE: SYN-02</span
+                    >
+                  </div>
+                  <h3 class="font-headline-lg text-headline-lg text-primary">
+                    Синастрия (Совместимость)
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Геометрия парных союзов: партнерские ожидания, причины
+                    эмоциональных разрывов, точки взаимного финансового и
+                    творческого роста.
+                  </p>
+                </div>
+                <div class="py-space-md flex items-center justify-center">
+                  <div
+                    class="relative w-36 h-20 flex items-center justify-center"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center text-primary font-headline-sm text-headline-sm"
+                    >
+                      ♀
+                    </div>
+                    <div
+                      class="w-16 h-16 rounded-full bg-secondary-container/40 -ml-4 flex items-center justify-center text-secondary-fixed font-headline-sm text-headline-sm"
+                    >
+                      ♂
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm">
+                  <span class="font-headline-md text-headline-md text-primary"
+                    >от 260 €</span
+                  >
+                  <a
+                    class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-secondary uppercase hover:text-primary transition-colors"
+                    href="#pricing"
+                  >
+                    Заказать
+                    <span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Bento 3: Solar Year Forecast (Col Span 5) -->
+              <div
+                class="lg:col-span-5 bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-space-sm py-1 rounded-full bg-surface-container-highest text-secondary font-label-md text-label-md uppercase"
+                      >Годовой навигатор</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm font-mono text-outline"
+                      >CODE: SOL-03</span
+                    >
+                  </div>
+                  <h3 class="font-headline-lg text-headline-lg text-primary">
+                    Соляр на 12 месяцев
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Календарь персонального года от дня рождения. Определение
+                    географии встречи Соляра, периодов спада энергии и окон
+                    возможностей для больших сделок.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-space-xl">
+                  <span class="font-headline-md text-headline-md text-primary"
+                    >от 160 €</span
+                  >
+                  <a
+                    class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-secondary uppercase hover:text-primary transition-colors"
+                    href="#pricing"
+                  >
+                    Выбрать
+                    <span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Bento 4: Financial & Business Strategy (Col Span 7) -->
+              <div
+                class="lg:col-span-7 bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-xl flex flex-col justify-between group hover:bg-surface-container-high transition-colors"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="px-space-sm py-1 rounded-full bg-surface-container-highest text-secondary font-label-md text-label-md uppercase"
+                      >Капитал &amp; Статус</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm font-mono text-outline"
+                      >CODE: FIN-04</span
+                    >
+                  </div>
+                  <h3 class="font-headline-lg text-headline-lg text-primary">
+                    Финансовый вектор &amp; Бизнес-стратегия
+                  </h3>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant max-w-lg"
+                  >
+                    Анализ домов II, VIII и X. Определение денежных профессий,
+                    оптимальных форматов партнерств, периодов инвестиционного
+                    затишья и агрессивной экспансии.
+                  </p>
+                </div>
+                <div
+                  class="my-space-md p-space-md bg-surface-container-low rounded-lg grid grid-cols-2 gap-space-sm"
+                >
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Масштабирование</span
+                    >
+                    <p class="font-body-sm text-body-sm text-primary">
+                      Точные даты транзитов Юпитера по дому статуса
+                    </p>
+                  </div>
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-outline uppercase"
+                      >Управление рисками</span
+                    >
+                    <p class="font-body-sm text-body-sm text-primary">
+                      Аспекты Сатурна и Плутона к куспидам капитала
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm">
+                  <span class="font-headline-md text-headline-md text-primary"
+                    >от 360 €</span
+                  >
+                  <a
+                    class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-secondary uppercase hover:text-primary transition-colors"
+                    href="#pricing"
+                  >
+                    Стратегия
+                    <span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- DAILY SYNCHRONICITY (4 ELEMENTS & 12 ZODIAC CARDS) -->
+        <section
+          class="w-full bg-surface-container-lowest py-space-xl"
+          id="daily"
+        >
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg"
+            >
+              <div>
+                <span
+                  class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                  >Эфемериды момента</span
+                >
+                <h2 class="font-headline-lg text-headline-lg text-primary mt-1">
+                  Импульс сегодняшнего дня
+                </h2>
+              </div>
+              <!-- 4 Elements Tabs -->
+              <div
+                class="flex flex-wrap items-center gap-space-xs bg-surface-container p-1 rounded-full"
+                id="element-tabs"
+              >
+                <button
+                  class="tab-btn px-space-md py-1 rounded-full bg-primary-container text-on-primary font-label-md text-label-md uppercase"
+                  data-element="all"
+                  type="button"
+                >
+                  Все стихии
+                </button>
+                <button
+                  class="tab-btn px-space-md py-1 rounded-full text-on-surface-variant font-label-md text-label-md uppercase hover:text-primary"
+                  data-element="fire"
+                  type="button"
+                >
+                  Огонь
+                </button>
+                <button
+                  class="tab-btn px-space-md py-1 rounded-full text-on-surface-variant font-label-md text-label-md uppercase hover:text-primary"
+                  data-element="earth"
+                  type="button"
+                >
+                  Земля
+                </button>
+                <button
+                  class="tab-btn px-space-md py-1 rounded-full text-on-surface-variant font-label-md text-label-md uppercase hover:text-primary"
+                  data-element="air"
+                  type="button"
+                >
+                  Воздух
+                </button>
+                <button
+                  class="tab-btn px-space-md py-1 rounded-full text-on-surface-variant font-label-md text-label-md uppercase hover:text-primary"
+                  data-element="water"
+                  type="button"
+                >
+                  Вода
+                </button>
+              </div>
+            </div>
+            <!-- Live Astrological Aspect Indicator Bar -->
+            <div
+              class="bg-surface-container p-space-md rounded-xl mb-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"
+            >
+              <div class="flex items-center gap-space-md">
+                <div
+                  class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center"
+                >
+                  <span
+                    class="material-symbols-outlined text-primary text-[22px]"
+                    >cyclone</span
+                  >
+                </div>
+                <div>
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider text-secondary"
+                    >Ключевой транзит дня</span
+                  >
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    Луна в соединении с Юпитером • Тригон к Марсу
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="font-body-sm text-body-sm text-on-surface-variant"
+                  >Резонансный коридор: 11:20 — 18:45 МСК</span
+                >
+              </div>
+            </div>
+            <!-- 12 Signs Tactile Cards Grid -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-space-sm"
+              id="zodiac-grid"
+            >
+              <!-- Aries -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="fire"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♈ Овен</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Огонь</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    21.03 - 19.04
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Энергетический подъем, инициатива в переговорах
+                  </p>
+                </div>
+              </div>
+              <!-- Taurus -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="earth"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♉ Телец</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Земля</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    20.04 - 20.05
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Финансовая стабильность, закрепление договоренностей
+                  </p>
+                </div>
+              </div>
+              <!-- Gemini -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="air"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♊ Близнецы</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Воздух</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    21.05 - 20.06
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Обилие инсайтов, время быстрых решений
+                  </p>
+                </div>
+              </div>
+              <!-- Cancer -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="water"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♋ Рак</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Вода</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    21.06 - 22.07
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Укрепление тылов, интуитивная ясность
+                  </p>
+                </div>
+              </div>
+              <!-- Leo -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="fire"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♌ Лев</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Огонь</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    23.07 - 22.08
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Творческий манифест, лидерский авторитет
+                  </p>
+                </div>
+              </div>
+              <!-- Virgo -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="earth"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♍ Дева</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Земля</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    23.08 - 22.09
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Оптимизация рутины, аналитическая резкость
+                  </p>
+                </div>
+              </div>
+              <!-- Libra -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="air"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♎ Весы</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Воздух</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    23.09 - 22.10
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Дипломатический триумф, баланс эстетики
+                  </p>
+                </div>
+              </div>
+              <!-- Scorpio -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="water"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♏ Скорпион</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Вода</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    23.10 - 21.11
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Сила трансформации, глубинная концентрация
+                  </p>
+                </div>
+              </div>
+              <!-- Sagittarius -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="fire"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♐ Стрелец</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Огонь</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    22.11 - 21.12
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Расширение горизонтов, новые союзы
+                  </p>
+                </div>
+              </div>
+              <!-- Capricorn -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="earth"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♑ Козерог</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Земля</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    22.12 - 19.01
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Стратегическое планирование, дисциплина
+                  </p>
+                </div>
+              </div>
+              <!-- Aquarius -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="air"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♒ Водолей</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Воздух</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    20.01 - 18.02
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Инновационные подходы, независимость
+                  </p>
+                </div>
+              </div>
+              <!-- Pisces -->
+              <div
+                class="zodiac-card p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all cursor-pointer flex flex-col justify-between h-36"
+                data-element="water"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md text-secondary"
+                    >♓ Рыбы</span
+                  >
+                  <span class="font-label-sm text-label-sm text-outline"
+                    >Вода</span
+                  >
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    19.02 - 20.03
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1"
+                  >
+                    Эмпатия, художественное озарение
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- ABOUT THE ASTROLOGER (Split Card with authentic image reference) -->
+        <section class="w-full bg-surface py-space-xl" id="expert">
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div
+              class="bg-surface-container rounded-2xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12"
+            >
+              <!-- Left: Portrait Image -->
+              <div
+                class="lg:col-span-5 relative min-h-[460px] lg:min-h-[580px]"
+              >
+                <img
+                  alt="Астрая — ведущий астролог Aura Astrology"
+                  class="w-full h-full object-cover object-center"
+                  src="https://lh3.googleusercontent.com/aida/AEtjO1VH7g3Kgbr_9mPRrpEMkXOuZyMtLeRIhFukVoOxcoORX-opl3mBLX_JkjMZ4h1-jezyNMV6NeKW_-bSjD8QuEAoQGFc46D5ab7aNVVlHkIK8oFKCgl-l303BCQ7CcCXN2XcIkHMqfuxlXr4LnqEfokHWgQKYnvDDUwRvi2XrGxLGcdjnA8rLOZMS0iZT9FqySjiiCRm_B6dEYybp2ImenLBtsHSFnzFfzQgSHmRxeO5_A"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-surface-container via-transparent to-transparent opacity-80"
+                ></div>
+                <div class="absolute bottom-space-lg left-space-lg z-10">
+                  <span
+                    class="px-space-sm py-1 rounded-full bg-surface-container-high text-primary font-label-md text-label-md uppercase"
+                    >Основатель лаборатории</span
+                  >
+                  <div
+                    class="font-headline-lg text-headline-lg text-primary mt-1"
+                  >
+                    Астрая Валорис
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Магистр математической астрологии • FAS London
+                  </p>
+                </div>
+              </div>
+              <!-- Right: Philosophy & Credentials -->
+              <div
+                class="lg:col-span-7 p-space-lg md:p-space-xl flex flex-col justify-between gap-space-lg"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div
+                    class="inline-flex items-center gap-space-xs text-secondary font-label-md text-label-md uppercase tracking-wider"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >stars</span
+                    >
+                    Философия точности
+                  </div>
+                  <h3 class="font-headline-lg text-headline-lg text-primary">
+                    «Астрология — это не фатум в камне. Это сверхточная
+                    навигационная карта ваших внутренних приливов и отливов.»
+                  </h3>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    Более 10 лет я соединяю строгие расчетные модели швейцарских
+                    эфемерид с юнгианской глубинной психологией. Никаких
+                    пугающих пророчеств и фаталистических шаблонов: каждый
+                    разбор дает вам рычаги управления собственной судьбой,
+                    четкие периоды для действий и глубокое принятие своей
+                    природы.
+                  </p>
+                </div>
+                <!-- Credential Stats Matrix -->
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-4 gap-space-md pt-space-md"
+                >
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-high flex flex-col"
+                  >
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >10+ лет</span
+                    >
+                    <span class="font-label-sm text-label-sm text-outline"
+                      >Практики</span
+                    >
+                  </div>
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-high flex flex-col"
+                  >
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >98.4%</span
+                    >
+                    <span class="font-label-sm text-label-sm text-outline"
+                      >Ректификация</span
+                    >
+                  </div>
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-high flex flex-col"
+                  >
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >5 000+</span
+                    >
+                    <span class="font-label-sm text-label-sm text-outline"
+                      >Клиентов</span
+                    >
+                  </div>
+                  <div
+                    class="p-space-sm rounded-lg bg-surface-container-high flex flex-col"
+                  >
+                    <span class="font-headline-md text-headline-md text-primary"
+                      >40+ стр</span
+                    >
+                    <span class="font-label-sm text-label-sm text-outline"
+                      >Книга разбора</span
+                    >
+                  </div>
+                </div>
+                <div class="pt-space-xs">
+                  <a
+                    class="inline-flex items-center justify-center px-space-lg py-space-sm rounded-full bg-primary-container text-on-primary font-headline-sm text-headline-sm transition-all hover:bg-primary-fixed"
+                    href="#pricing"
+                  >
+                    Забронировать личную сессию
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- SERVICE PACKAGES & TRANSPARENT PRICING -->
+        <section
+          class="w-full bg-surface-container-lowest py-space-xl"
+          id="pricing"
+        >
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div class="flex flex-col gap-space-xs mb-space-xl text-center">
+              <span
+                class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                >Инвестиция в ясность</span
+              >
+              <h2
+                class="font-display-lg text-display-lg text-primary font-normal"
+              >
+                Форматы сотрудничества
+              </h2>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto"
+              >
+                Прозрачные тарифы без скрытых доплат. Каждый формат включает
+                рукописный или цифровой буклет высшей типографики.
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch"
+            >
+              <!-- Tier 1: Solar -->
+              <div
+                class="bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-lg flex flex-col justify-between"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Годовой срез</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-outline font-mono"
+                      >12 МЕСЯЦЕВ</span
+                    >
+                  </div>
+                  <div>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">
+                      Базовый Соляр
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Ориентир на 365 дней от текущего дня рождения.
+                    </p>
+                  </div>
+                  <div
+                    class="font-display-lg text-display-lg text-primary my-space-xs"
+                  >
+                    160 €
+                  </div>
+                  <ul
+                    class="flex flex-col gap-space-sm text-on-surface-variant font-body-sm text-body-sm"
+                  >
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Точный расчет времени включения Соляра
+                    </li>
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Выбор оптимального города встречи
+                    </li>
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Аудио-разбор ключевых точек года (40 мин)
+                    </li>
+                    <li class="flex items-center gap-space-xs text-outline">
+                      <span class="material-symbols-outlined text-[18px]"
+                        >close</span
+                      >
+                      Анализ глубоких натальных узлов
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-space-xl">
+                  <button
+                    class="w-full py-space-sm rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm transition-all hover:bg-surface-container-highest"
+                    type="button"
+                  >
+                    Выбрать Соляр
+                  </button>
+                </div>
+              </div>
+              <!-- Tier 2: The Core Natal Atlas (Featured) -->
+              <div
+                class="bg-surface-container-high p-space-lg md:p-space-xl rounded-xl shadow-2xl flex flex-col justify-between relative -mt-0 lg:-mt-4"
+              >
+                <div
+                  class="absolute -top-3 left-1/2 -translate-x-1/2 px-space-md py-0.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-md"
+                >
+                  Рекомендованный выбор
+                </div>
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between pt-1">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Фундаментальный</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-outline font-mono"
+                      >COMPLETE</span
+                    >
+                  </div>
+                  <div>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">
+                      Натальный Атлас
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Полный аудит личности, предназначения и компенсаторных
+                      ключей.
+                    </p>
+                  </div>
+                  <div
+                    class="font-display-lg text-display-lg text-primary my-space-xs"
+                  >
+                    320 €
+                  </div>
+                  <ul
+                    class="flex flex-col gap-space-sm text-on-surface font-body-sm text-body-sm"
+                  >
+                    <li class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Полная ректификация времени рождения
+                    </li>
+                    <li class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Книга-атлас на 40+ страниц (PDF + печать)
+                    </li>
+                    <li class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Онлайн-сессия 90 минут с видеозаписью в 4K
+                    </li>
+                    <li class="flex items-center gap-space-xs">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Поддержка в Telegram в течение 14 дней
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-space-xl">
+                  <button
+                    class="w-full py-space-sm rounded-full bg-primary-container text-on-primary font-headline-sm text-headline-sm transition-all hover:bg-primary-fixed shadow-lg"
+                    type="button"
+                  >
+                    Заказать атлас
+                  </button>
+                </div>
+              </div>
+              <!-- Tier 3: VIP Mentorship -->
+              <div
+                class="bg-surface-container p-space-lg md:p-space-xl rounded-xl shadow-lg flex flex-col justify-between"
+              >
+                <div class="flex flex-col gap-space-md">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md text-secondary uppercase"
+                      >Индивидуальное ведение</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-outline font-mono"
+                      >EXECUTIVE</span
+                    >
+                  </div>
+                  <div>
+                    <h3 class="font-headline-lg text-headline-lg text-primary">
+                      VIP Менторство
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                    >
+                      Астро-стратегия для первых лиц, инвесторов и масштабных
+                      партнерств.
+                    </p>
+                  </div>
+                  <div
+                    class="font-display-lg text-display-lg text-primary my-space-xs"
+                  >
+                    790 €
+                  </div>
+                  <ul
+                    class="flex flex-col gap-space-sm text-on-surface-variant font-body-sm text-body-sm"
+                  >
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Включает все опции Натального Атласа и Соляра
+                    </li>
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Бизнес-синастрия с 3 ключевыми партнерами
+                    </li>
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Личный консьерж-доступ в мессенджере 30 дней
+                    </li>
+                    <li class="flex items-center gap-space-xs text-on-surface">
+                      <span
+                        class="material-symbols-outlined text-primary text-[18px]"
+                        >check_circle</span
+                      >
+                      Элекции дат для крупных сделок и контрактов
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-space-xl">
+                  <button
+                    class="w-full py-space-sm rounded-full bg-surface-container-high text-primary font-headline-sm text-headline-sm transition-all hover:bg-surface-container-highest"
+                    type="button"
+                  >
+                    Запросить бриф
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- VERIFIED CLIENT CASE STUDIES & REVIEWS -->
+        <section class="w-full bg-surface py-space-xl" id="reviews">
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div class="flex flex-col gap-space-xs mb-space-xl">
+              <span
+                class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                >Практические результаты</span
+              >
+              <h2 class="font-headline-lg text-headline-lg text-primary">
+                Кейсы и отзывы клиентов
+              </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+              <!-- Review 1 -->
+              <div
+                class="bg-surface-container p-space-lg rounded-xl shadow-lg flex flex-col justify-between gap-space-md"
+              >
+                <div class="flex flex-col gap-space-sm">
+                  <div class="flex items-center text-primary">
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                  </div>
+                  <p
+                    class="font-body-md text-body-md text-on-surface leading-relaxed"
+                  >
+                    «Я прагматик до мозга костей, основатель tech-стартапа. К
+                    Астрае пришел за анализом партнерской синастрии. Точность
+                    попадания в поведенческие триггеры партнера оказалась
+                    хирургической. Мы избежали катастрофического кассового
+                    разрыва.»
+                  </p>
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    Максим Градов
+                  </div>
+                  <div class="font-label-sm text-label-sm text-outline">
+                    Co-founder • FinTech платформа
+                  </div>
+                </div>
+              </div>
+              <!-- Review 2 -->
+              <div
+                class="bg-surface-container p-space-lg rounded-xl shadow-lg flex flex-col justify-between gap-space-md"
+              >
+                <div class="flex flex-col gap-space-sm">
+                  <div class="flex items-center text-primary">
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                  </div>
+                  <p
+                    class="font-body-md text-body-md text-on-surface leading-relaxed"
+                  >
+                    «Натальный Атлас перевернул мое понимание личного кризиса 30
+                    лет. Это не просто список качеств, а пошаговый мануал:
+                    почему именно сейчас у меня трансформируется карьера и как
+                    направить энергию Марса в созидание.»
+                  </p>
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    Елена Власова
+                  </div>
+                  <div class="font-label-sm text-label-sm text-outline">
+                    Креативный директор • Архитектурное бюро
+                  </div>
+                </div>
+              </div>
+              <!-- Review 3 -->
+              <div
+                class="bg-surface-container p-space-lg rounded-xl shadow-lg flex flex-col justify-between gap-space-md"
+              >
+                <div class="flex flex-col gap-space-sm">
+                  <div class="flex items-center text-primary">
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >star</span
+                    >
+                  </div>
+                  <p
+                    class="font-body-md text-body-md text-on-surface leading-relaxed"
+                  >
+                    «Соляр заказываю четвертый год подряд. Выбор точки релокации
+                    на день рождения дал колоссальный скачок по сделкам.
+                    Огромная благодарность за отсутствие навязчивой мистики и
+                    уважение к интеллекту клиента.»
+                  </p>
+                </div>
+                <div>
+                  <div class="font-headline-sm text-headline-sm text-primary">
+                    Дмитрий Романов
+                  </div>
+                  <div class="font-label-sm text-label-sm text-outline">
+                    Частный инвестор • Недвижимость
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- MINIMALIST APPLE ACCORDION FAQ -->
+        <section
+          class="w-full bg-surface-container-lowest py-space-xl"
+          id="faq"
+        >
+          <div
+            class="max-w-[960px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+          >
+            <div class="flex flex-col gap-space-xs mb-space-lg text-center">
+              <span
+                class="font-label-md text-label-md uppercase tracking-wider text-secondary"
+                >Прозрачность процесса</span
+              >
+              <h2 class="font-headline-lg text-headline-lg text-primary">
+                Часто задаваемые вопросы
+              </h2>
+            </div>
+            <div class="flex flex-col gap-space-sm" id="faq-accordion">
+              <!-- FAQ 1 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden shadow-sm"
+              >
+                <button
+                  class="faq-toggle w-full p-space-md flex items-center justify-between text-left text-primary font-headline-sm text-headline-sm hover:bg-surface-container-high transition-colors"
+                  type="button"
+                >
+                  <span
+                    >Что делать, если я не знаю точного времени рождения с
+                    точностью до минуты?</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform duration-300"
+                    >expand_more</span
+                  >
+                </button>
+                <div
+                  class="faq-content hidden px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md"
+                >
+                  Для этого проводится процедура ректификации. По датам ключевых
+                  событий вашей жизни (браки, переезды, операции, карьерные
+                  взлеты) астролог вычисляет точный градус Асцендента с
+                  точностью до минут и секунд дуги.
+                </div>
+              </div>
+              <!-- FAQ 2 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden shadow-sm"
+              >
+                <button
+                  class="faq-toggle w-full p-space-md flex items-center justify-between text-left text-primary font-headline-sm text-headline-sm hover:bg-surface-container-high transition-colors"
+                  type="button"
+                >
+                  <span>В каком виде я получу итоговый материал?</span>
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform duration-300"
+                    >expand_more</span
+                  >
+                </button>
+                <div
+                  class="faq-content hidden px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md"
+                >
+                  Вы получаете персональную интерактивную электронную
+                  книгу-атлас (40+ страниц с графиками и аннотациями),
+                  видеозапись живой онлайн-консультации в разрешении 4K, а также
+                  аудио-конспект для удобного прослушивания в пути.
+                </div>
+              </div>
+              <!-- FAQ 3 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden shadow-sm"
+              >
+                <button
+                  class="faq-toggle w-full p-space-md flex items-center justify-between text-left text-primary font-headline-sm text-headline-sm hover:bg-surface-container-high transition-colors"
+                  type="button"
+                >
+                  <span
+                    >Гарантируется ли полная конфиденциальность моих
+                    данных?</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform duration-300"
+                    >expand_more</span
+                  >
+                </button>
+                <div
+                  class="faq-content hidden px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md"
+                >
+                  Безусловно. Мы работаем по строгому протоколу NDA. Ваши личные
+                  данные, карты и темы консультаций шифруются и никогда не
+                  передаются третьим лицам или публичным кейсам без вашего
+                  письменного согласия.
+                </div>
+              </div>
+              <!-- FAQ 4 -->
+              <div
+                class="bg-surface-container rounded-xl overflow-hidden shadow-sm"
+              >
+                <button
+                  class="faq-toggle w-full p-space-md flex items-center justify-between text-left text-primary font-headline-sm text-headline-sm hover:bg-surface-container-high transition-colors"
+                  type="button"
+                >
+                  <span
+                    >Чем западная классическая традиция отличается от ведической
+                    (Джйотиш)?</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform duration-300"
+                    >expand_more</span
+                  >
+                </button>
+                <div
+                  class="faq-content hidden px-space-md pb-space-md text-on-surface-variant font-body-md text-body-md"
+                >
+                  Западная традиция базируется на тропическом зодиаке,
+                  привязанном к точкам равноденствия и сезонам Земли, и глубоко
+                  интегрирована с психологией личности Юнга. Она ориентирована
+                  на свободу воли, раскрытие потенциала и стратегию, а не
+                  фатальную кармическую предопределенность.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CLOSING HOROLOGY CALL TO ACTION -->
+        <section class="w-full bg-surface-container py-space-xl">
+          <div
+            class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin text-center flex flex-col items-center gap-space-md"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[24px]"
+                >auto_awesome</span
+              >
+            </div>
+            <h2
+              class="font-display-lg text-display-lg text-primary max-w-2xl font-normal"
+            >
+              Небо говорит на языке математики. Научитесь его читать.
+            </h2>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-lg"
+            >
+              Забронируйте персональный натальный атлас прямо сейчас и получите
+              первичный разбор транзитов в течение 24 часов.
+            </p>
+            <div class="pt-space-xs">
+              <a
+                class="inline-flex items-center justify-center px-space-xl py-space-md rounded-full bg-primary-container text-on-primary font-headline-sm text-headline-sm transition-all hover:scale-[1.02] hover:bg-primary-fixed shadow-xl"
+                href="#calculator"
+              >
+                Сформировать мой астрономический атлас
+              </a>
+            </div>
+          </div>
+        </section>
+        <script>
+          // FAQ Accordion Toggle Interaction
+          document.querySelectorAll(".faq-toggle").forEach((button) => {
+            button.addEventListener("click", () => {
+              const content = button.nextElementSibling;
+              const icon = button.querySelector(".material-symbols-outlined");
+              const isHidden = content.classList.contains("hidden");
+
+              document
+                .querySelectorAll(".faq-content")
+                .forEach((c) => c.classList.add("hidden"));
+              document
+                .querySelectorAll(".faq-toggle .material-symbols-outlined")
+                .forEach((i) => (i.style.transform = "rotate(0deg)"));
+
+              if (isHidden) {
+                content.classList.remove("hidden");
+                icon.style.transform = "rotate(180deg)";
+              }
+            });
+          });
+
+          // 4 Elements Filter Tab Switcher
+          const tabs = document.querySelectorAll("#element-tabs .tab-btn");
+          const cards = document.querySelectorAll("#zodiac-grid .zodiac-card");
+
+          tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+              tabs.forEach((t) => {
+                t.classList.remove("bg-primary-container", "text-on-primary");
+                t.classList.add("text-on-surface-variant");
+              });
+              tab.classList.add("bg-primary-container", "text-on-primary");
+              tab.classList.remove("text-on-surface-variant");
+
+              const elem = tab.getAttribute("data-element");
+              cards.forEach((card) => {
+                if (
+                  elem === "all" ||
+                  card.getAttribute("data-element") === elem
+                ) {
+                  card.style.display = "flex";
+                } else {
+                  card.style.display = "none";
+                }
+              });
+            });
+          });
+
+          // Interactive Calculator Simulate Output
+          const calcBtn = document.getElementById("calc-btn");
+          if (calcBtn) {
+            calcBtn.addEventListener("click", () => {
+              const dob = document.getElementById("calc-dob").value;
+              const resSun = document.getElementById("res-sun");
+              const resMoon = document.getElementById("res-moon");
+              const resAsc = document.getElementById("res-asc");
+
+              if (dob) {
+                const month = parseInt(dob.split("-")[1], 10);
+                const signs = [
+                  "Козерог",
+                  "Водолей",
+                  "Рыбы",
+                  "Овен",
+                  "Телец",
+                  "Близнецы",
+                  "Рак",
+                  "Лев",
+                  "Дева",
+                  "Весы",
+                  "Скорпион",
+                  "Стрелец",
+                ];
+                const sunSign = signs[month % 12];
+                const ascSign = signs[(month + 3) % 12];
+                const moonSign = signs[(month + 7) % 12];
+
+                resSun.textContent = sunSign + " • 14°";
+                resMoon.textContent = moonSign + " • 08°";
+                resAsc.textContent = ascSign + " • 22°";
+
+                calcBtn.innerHTML =
+                  '<span class="material-symbols-outlined text-[20px]">check</span> Расчет обновлен';
+                setTimeout(() => {
+                  calcBtn.innerHTML =
+                    '<span class="material-symbols-outlined text-[20px]">explore</span> Сформировать отчет';
+                }, 2000);
+              }
+            });
+          }
+        </script>
+      </div>
+    </main>
+    <footer class="w-full bg-surface-container-lowest py-space-xl">
+      <div
+        class="max-w-[1440px] mx-auto px-margin-mobile md:px-gutter lg:px-margin"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-xl pb-space-xl"
+        >
+          <div class="lg:col-span-4 flex flex-col gap-space-md">
+            <div class="flex items-center gap-space-sm">
+              <div
+                class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center shadow-[0_0_12px_rgba(247,231,206,0.2)]"
+              >
+                <span class="material-symbols-outlined text-primary text-[16px]"
+                  >auto_awesome</span
+                >
+              </div>
+              <span
+                class="font-headline-sm text-headline-sm text-primary tracking-wider"
+                >AURA ASTROLOGY</span
+              >
+            </div>
+            <p
+              class="font-body-md text-body-md text-on-surface-variant max-w-sm"
+            >
+              Высокоточная цифровая астрология и натальные хроники. Искусство
+              понимания судьбы сквозь оптику астрономии и элегантного
+              минимализма.
+            </p>
+          </div>
+          <div class="lg:col-span-2 flex flex-col gap-space-sm">
+            <span class="font-label-md text-label-md text-secondary uppercase"
+              >Навигация</span
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="razbory"
+              href="#"
+              >Разборы</a
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="insayt-dnya"
+              href="#"
+              >Инсайт дня</a
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="ob-eksperte"
+              href="#"
+              >Об эксперте</a
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="otzyvy"
+              href="#"
+              >Отзывы</a
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="tarify"
+              href="#"
+              >Тарифы</a
+            >
+          </div>
+          <div class="lg:col-span-2 flex flex-col gap-space-sm">
+            <span class="font-label-md text-label-md text-secondary uppercase"
+              >Контакты</span
+            ><span class="font-body-md text-body-md text-on-surface-variant"
+              >concierge@aura-astro.com</span
+            ><span class="font-body-md text-body-md text-on-surface-variant"
+              >Telegram: @aura_astrology</span
+            ><span class="font-body-md text-body-md text-on-surface-variant"
+              >WhatsApp: +7 (900) 800-44-22</span
+            ><a
+              class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors"
+              data-path="faq"
+              href="#"
+              >Вопросы и ответы</a
+            >
+          </div>
+          <div class="lg:col-span-4 flex flex-col gap-space-md">
+            <span class="font-label-md text-label-md text-secondary uppercase"
+              >Звездный бюллетень</span
+            >
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+              Получайте транзиты планет, лунные эфемериды и закрытые
+              аналитические эссе каждое полнолуние.
+            </p>
+            <form
+              class="flex items-center gap-space-xs"
+              onsubmit="return false;"
+            >
+              <input
+                class="flex-1 bg-surface-container-high px-space-md py-space-sm rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary-container"
+                placeholder="Ваш e-mail"
+                type="email"
+              /><button
+                class="px-space-md py-space-sm rounded-lg bg-surface-container-highest text-primary font-label-md text-label-md uppercase tracking-wide hover:bg-primary-container hover:text-on-primary transition-colors"
+                type="button"
+              >
+                Подписка
               </button>
             </form>
           </div>
         </div>
-
-        <div class="footer-bottom">
-          <p>Copyright &copy; 2026 Aura Astrology. Все права защищены.</p>
-          <p>Политика конфиденциальности · Условия использования</p>
+        <div
+          class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant"
+        >
+          <span class="font-body-sm text-body-sm"
+            >© 2025 Aura Astrology. Все права защищены.</span
+          >
+          <div class="flex items-center gap-space-lg">
+            <a
+              class="font-body-sm text-body-sm hover:text-on-surface transition-colors"
+              data-path="politika-konfidentsialnosti"
+              href="#"
+              >Политика конфиденциальности</a
+            ><a
+              class="font-body-sm text-body-sm hover:text-on-surface transition-colors"
+              data-path="polzovatelskoe-soglashenie"
+              href="#"
+              >Пользовательское соглашение</a
+            >
+          </div>
         </div>
       </div>
     </footer>
-
-    <!-- JAVASCRIPT -->
-    <script>
-      // 1. Interactive Zodiac Tactile Grid
-      const advices = {
-        aries:
-          "Сегодня ваша энергия бьет ключом. Направьте её на завершение приоритетных задач и смелые начинания.",
-        taurus:
-          "Звёзды рекомендуют уделить время финансовой стратегии. Высока вероятность неожиданных дивидендов.",
-        gemini:
-          "Идеальный день для переговоров и новых связей. Ваша убедительность сегодня на абсолютном пике.",
-        cancer:
-          "Доверьтесь внутренней интуиции — она подскажет точное решение в неоднозначной ситуации.",
-        leo: "Время проявлять масштаб. Не бойтесь брать на себя лидерство и презентовать свои смелые проекты.",
-        virgo:
-          "Внимание к деталям принесет максимальный результат. Прекрасный день для систематизации планов.",
-        libra:
-          "Соблюдайте баланс интересов. Открытый и дипломатичный диалог с партнером выведет отношения на новый уровень.",
-        scorpio:
-          "День глубокой трансформации. Оставьте в прошлом неэффективные процессы, чтобы освободить ресурс для главного.",
-        sagittarius:
-          "Расширяйте горизонты. Запланируйте поездку или начните изучение новой профессиональной области.",
-        capricorn:
-          "Максимальный фокус на долгосрочной стратегии. Ваша дисциплина скоро конвертируется в высокий статус.",
-        aquarius:
-          "Время нестандартных решений. Оригинальный взгляд позволит элегантно обойти давнее препятствие.",
-        pisces:
-          "Состояние потока и высокой креативности. Позвольте себе мыслить вне рамок привычной логики.",
-      };
-
-      const zodiacButtons = document.querySelectorAll(".zodiac-btn");
-      const oracleOutput = document.getElementById("oracle-output");
-      const oracleLabel = document.getElementById("oracle-label");
-      const oracleText = document.getElementById("oracle-text");
-
-      zodiacButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          zodiacButtons.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-
-          const sign = btn.dataset.sign;
-          const title = btn.dataset.title;
-
-          oracleOutput.classList.add("changing");
-          setTimeout(() => {
-            oracleLabel.textContent = `${title} · Фокус дня`;
-            oracleText.textContent = advices[sign];
-            oracleOutput.classList.remove("changing");
-          }, 220);
-        });
-      });
-
-      // 2. Smooth FAQ Accordion
-      const faqItems = document.querySelectorAll(".faq-item");
-      faqItems.forEach((item) => {
-        const trigger = item.querySelector(".faq-trigger");
-        const content = item.querySelector(".faq-content");
-
-        trigger.addEventListener("click", () => {
-          const isOpen = item.classList.contains("active");
-
-          faqItems.forEach((other) => {
-            other.classList.remove("active");
-            other.querySelector(".faq-content").style.maxHeight = null;
-          });
-
-          if (!isOpen) {
-            item.classList.add("active");
-            content.style.maxHeight = content.scrollHeight + "px";
-          }
-        });
-      });
-
-      // 3. Apple-style Scroll Reveal Observer
-      const revealElements = document.querySelectorAll(".reveal");
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-      );
-
-      revealElements.forEach((el) => revealObserver.observe(el));
-    </script>
   </body>
 </html>
